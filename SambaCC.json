@@ -1,0 +1,109 @@
+{
+   "CapAdd" : null,
+   "CapDrop" : null,
+   "cmd" : "runsvdir -P /container/config/runit",
+   "cpu_priority" : 50,
+   "enable_publish_all_ports" : false,
+   "enable_restart_policy" : true,
+   "enabled" : true,
+   "entrypoint_default" : "/container/scripts/entrypoint.sh",
+   "env_variables" : [
+      {
+         "key" : "PATH",
+         "value" : "/container/scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      },
+      {
+         "key" : "SAMBA_VOLUME_CONFIG_cc",
+         "value" : "[CC]; path = /shares/CC; guest ok = no; browseable = yes; read only = no; valid users = bridge;"
+      },
+      {
+         "key" : "SAMBA_CONF_WORKGROUP",
+         "value" : "BOSTONSP"
+      },
+      {
+         "key" : "AVAHI_DISABLE",
+         "value" : "1"
+      },
+      {
+         "key" : "SAMBA_GLOBAL_STANZA",
+         "value" : "netbios name = SambaCC; ntlm auth = yes; lanman auth = yes; bind interfaces only = No; map to guest = Bad user; mangle prefix = 6; server min protocol = CORE; server max protocol = SMB3; wins support = yes; server signing = no;  lm announce = auto; unix extensions = no;  wide links = yes;  follow symlinks = yes; socket options = TCP_NODELAY; preferred master = yes; encrypt passwords = yes;"
+      },
+      {
+         "key" : "SAMBA_CONF_LOG_LEVEL",
+         "value" : "3 passdb:5 auth:5"
+      },
+	  {
+         "key" : "ACCOUNT_bridge",
+         "value" : "bridge:1000:C72F48CEA46F18FCC2265B23734E0DAC:4CEEB683F517497D82ACB6E58BBB9740:[U          ]:LCT-623ED29B:"
+      },
+	  {
+         "key" : "GROUPS_bridge",
+         "value" : "users"
+      },
+      {
+         "key" : "LANG",
+         "value" : "de_DE.UTF-8"
+      },
+      {
+         "key" : "LANGUAGE",
+         "value" : "de_DE.UTF-8"
+      },
+      {
+         "key" : "UID_bridge",
+         "value" : "1027"
+      }
+   ],
+   "exporting" : false,
+   "id" : "4493cff230bfde535bf3c5e54907af972fc22322cb976f93b02e66c6f8bbc419",
+   "image" : "samba_classic:latest",
+   "is_ddsm" : false,
+   "is_package" : false,
+   "links" : [],
+   "memory_limit" : 2147483648,
+   "memory_limit_slider" : 2048,
+   "name" : "SambaCC",
+   "network" : [
+      {
+         "driver" : "macvlan",
+         "name" : "localnetwork"
+      }
+   ],
+   "network_mode" : "localnetwork",
+   "port_bindings" : [
+      {
+         "container_port" : 137,
+         "host_port" : 0,
+         "type" : "udp"
+      },
+      {
+         "container_port" : 138,
+         "host_port" : 0,
+         "type" : "udp"
+      },
+      {
+         "container_port" : 139,
+         "host_port" : 0,
+         "type" : "tcp"
+      },
+      {
+         "container_port" : 445,
+         "host_port" : 0,
+         "type" : "tcp"
+      }
+   ],
+   "privileged" : false,
+   "shortcut" : {
+      "enable_shortcut" : false,
+      "enable_status_page" : false,
+      "enable_web_page" : false,
+      "web_page_url" : ""
+   },
+   "use_host_network" : false,
+   "volume_bindings" : [
+      {
+         "host_volume_file" : "/CC",
+         "mount_point" : "/shares/CC",
+         "type" : "rw"
+      }
+   ]
+}
